@@ -1,5 +1,13 @@
 # POT1 saturation genome editing
 
+> ### Not for clinical use
+>
+> These functional scores are research data from a study that has not yet completed peer
+> review. **They must not be used for clinical diagnosis, variant interpretation, patient
+> management, or any other clinical purpose.** Classification of a variant for clinical
+> purposes requires the full evidence framework, of which an experimental functional assay
+> is one component among several.
+
 Analysis pipeline for a saturation genome editing (SGE) screen of *POT1*. It
 takes raw per-library read counts and produces a functional score, a statistical
 classification and a full annotation for every variant assayed.

@@ -163,6 +163,13 @@ params <- list(
   vep_skip          = 92L
 )
 
+## Carried into the Notes sheet of each output workbook, so that it travels with
+## the file if the workbook is downloaded and circulated on its own.
+CLINICAL_USE_NOTICE <- paste(
+  "These functional scores are research data from a study that has not yet completed",
+  "peer review. They must not be used for clinical diagnosis, variant interpretation,",
+  "patient management, or any other clinical purpose.")
+
 ## The four discrete contrasts plus the continuous slope. Used as a suffix
 ## throughout the statistics columns.
 LFC_TAGS <- c("D4_D7", "D4_D10", "D4_D14", "D4_D21", "continuous")

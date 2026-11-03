@@ -240,6 +240,7 @@ write_supplementary <- function(data, n, file) {
   openxlsx::writeData(wb, s1, data,   startRow = 2)
   openxlsx::addWorksheet(wb, ttl[3])
   openxlsx::writeData(wb, ttl[3], ttl[2], startRow = 1, colNames = FALSE)
-  openxlsx::writeData(wb, ttl[3], notes, startRow = 2)
+  openxlsx::writeData(wb, ttl[3], CLINICAL_USE_NOTICE, startRow = 2, colNames = FALSE)
+  openxlsx::writeData(wb, ttl[3], notes, startRow = 4)
   openxlsx::saveWorkbook(wb, file, overwrite = TRUE)
 }
