@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POT1 molecular dynamics</title>
+<style>
+  :root {
+    --ink: #1a1a1a; --muted: #5c5c5c; --rule: #e0ddd7; --bg: #fbfaf8;
+    --accent: #8a2f2f; --panel: #fff; --flag-bg: #fdf6ec; --flag-edge: #c9a227;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e8e6e3; --muted: #a8a49e; --rule: #3a3734; --bg: #16151300;
+      --bg: #161513; --accent: #e08a8a; --panel: #1e1c1a;
+      --flag-bg: #2a2317; --flag-edge: #c9a227;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e8e6e3; --muted: #a8a49e; --rule: #3a3734; --bg: #161513;
+    --accent: #e08a8a; --panel: #1e1c1a; --flag-bg: #2a2317; --flag-edge: #c9a227;
+  }
+  body { background: var(--bg); color: var(--ink); margin: 0;
+         font: 16px/1.65 Charter, "Iowan Old Style", Georgia, serif; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .4rem; letter-spacing: -.01em; }
+  .sub { color: var(--muted); font-size: 1.02rem; margin: 0 0 2.5rem; }
+  h2 { font-size: 1.22rem; margin: 2.8rem 0 .8rem; padding-top: 1.4rem;
+       border-top: 1px solid var(--rule); letter-spacing: -.005em; }
+  h3 { font-size: 1rem; margin: 1.8rem 0 .4rem; }
+  h3 .tag { display: block; font-weight: 400; font-style: italic;
+            color: var(--muted); font-size: .9rem; margin-top: .15rem; }
+  p { margin: 0 0 1rem; }
+  figure { margin: 1.6rem 0 2rem; }
+  figure img { width: 100%; height: auto; display: block;
+               background: #fff; border: 1px solid var(--rule); border-radius: 3px; }
+  figcaption { color: var(--muted); font-size: .88rem; margin-top: .7rem; }
+  blockquote { margin: 1.2rem 0; padding: .9rem 1.1rem; background: var(--panel);
+               border-left: 3px solid var(--rule); border-radius: 0 3px 3px 0;
+               font-size: .93rem; color: var(--muted); }
+  blockquote p:last-child { margin-bottom: 0; }
+  .flag { background: var(--flag-bg); border-left: 3px solid var(--flag-edge);
+          padding: .9rem 1.1rem; border-radius: 0 3px 3px 0; margin: 1.6rem 0;
+          font-size: .94rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; margin: 1.2rem 0; }
+  th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--rule);
+           vertical-align: top; }
+  th { font-weight: 600; }
+  .scroll { overflow-x: auto; }
+  code { font: .88em ui-monospace, SFMono-Regular, Menlo, monospace;
+         background: var(--panel); padding: .1em .35em; border-radius: 3px; }
+  ul { margin: 0 0 1rem; padding-left: 1.3rem; }
+  li { margin-bottom: .4rem; }
+  .foot { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+          color: var(--muted); font-size: .88rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>POT1 molecular dynamics</h1>
+<p class="sub">Exploratory simulations of wild-type POT1 and six missense variants bound to telomeric DNA.</p>
+
+<p>Saturation genome editing places every POT1 missense variant on a quantitative functional
+scale, and separates the depleted variants into strong and weak classes. That classification
+is empirical: it says how a variant behaves in the assay, not why.</p>
+
+<p>These simulations asked whether the distinction has a visible structural correlate —
+whether variants in different functional classes perturb the dynamics of the POT1–ssDNA
+complex in different ways. Seven systems were run, one microsecond each: wild type and six
+clinically observed variants, chosen to span the functional classes and two structural
+situations. Three contact the telomeric DNA directly; two sit away from it at positions
+important for the fold.</p>
+
+<div class="flag">
+These are exploratory simulations shared alongside the paper. They are not part of its
+analysis and no result in the paper depends on them. The section below on
+<a href="#reading">what can be read from this</a> sets out the register in which they are
+informative — and the register in which they are not.
+</div>
+
+<h2>The simulations</h2>
+
+<figure>
+  <img src="figures/protein_dynamics.svg"
+       alt="Normal mode and RMSF analysis for six POT1 missense variants, with insets showing hydrogen bonding and energy decomposition values relative to wild type">
+</figure>
+
+<blockquote>
+<p>Individual structures show the first normal mode (NM1), with magnitude of motion for NM1
+depicted by the width of the tube, for each key missense variant. Each structure is coloured
+as a heatmap based on the change in RMSF (ΔRMSF) with respect to the wild-type RMSF. Insets
+highlight significant changes in hydrogen bonding interactions (dashed lines) with the
+telomeric DNA with respect to wild-type, and changes in the intermolecular interactions as
+calculated from energy decomposition analysis (EDA) with respect to the corresponding
+mutation of each variant (individual values under each residue; positive values indicate
+interactions for wild-type are favoured and negative values indicate the variant is
+favoured).</p>
+</blockquote>
+
+<p>The wild-type system is the reference throughout: it sets the baseline RMSF from which
+ΔRMSF is measured, and the hydrogen bonding and EDA values are compared against it.</p>
+
+<h2>Systems</h2>
+
+<div class="scroll">
+<table>
+<thead><tr><th>System</th><th>SGE classification</th><th>ClinVar at extraction</th><th>Position relative to ssDNA</th></tr></thead>
+<tbody>
+<tr><td>Wild type</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>p.Y36C</td><td>Weak depleted</td><td>Uncertain significance</td><td>Distant from DNA</td></tr>
+<tr><td>p.D51N</td><td>Strong depleted</td><td>Uncertain significance</td><td>Distant; important for fold</td></tr>
+<tr><td>p.Y89C</td><td>Weak depleted</td><td>Conflicting interpretation</td><td>Direct DNA interaction</td></tr>
+<tr><td>p.Q94E</td><td>Weak depleted</td><td>Uncertain significance</td><td>Direct DNA interaction</td></tr>
+<tr><td>p.Q94R</td><td>Weak depleted</td><td>Uncertain significance</td><td>Direct DNA interaction</td></tr>
+<tr><td>p.R137H</td><td>Strong depleted</td><td>Uncertain significance</td><td>Distant; important for fold</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Built from PDB <a href="https://www.rcsb.org/structure/1XJV">1XJV</a>, the POT1 OB1 and OB2
+domains bound to telomeric ssDNA. The SGE classifications come from the editing screen and
+stand on their own.</p>
+
+<h2 id="reading">What can be read from this</h2>
+
+<p>The useful part of this dataset is the setup, not the comparisons. Read in the right
+register it is informative; read as measurement it is not.</p>
+
+<h3>Each system was simulated once</h3>
+<p>With one trajectory per system there is no estimate of within-system variation, so a
+difference between two systems cannot be separated from the variation either would show on
+being run again. Everything comparative here — ΔRMSF, normal mode amplitude, hydrogen bond
+occupancy, EDA energies — is an observation to be tested rather than a quantity that has been
+measured. This constraint governs all the others.</p>
+
+<h3>The inset values carry no dispersion</h3>
+<p>They are single-trajectory numbers, so no uncertainty can be attached to them.
+EDA-derived interaction energies are in any case more reliable as relative than absolute
+quantities, and are strongest alongside experimental validation.</p>
+
+<h3>Convergence was not characterised</h3>
+<p>No RMSD-against-time analysis was performed, so whether 1 μs is long enough for these
+systems to equilibrate is not established.</p>
+
+<h3>Starting geometries were modelled</h3>
+<p>Mutant side chains were built with the Dunbrack rotamer library and clashes relieved.
+Rotamer choice matters at these positions, especially the three that contact DNA, so some of
+what is seen may follow from the initial model rather than from the substitution itself.</p>
+
+<h3>The analysis sits at the level of global motion</h3>
+<p>Normal modes and whole-chain RMSF describe how the complex moves overall. For
+substitutions like these the more informative level is local — what happens to a specific
+contact when a residue changes. The clearest case is p.Y89C, where the π–π stacking between
+Y89 and the telomeric guanine is lost outright. That is a concrete, tractable question this
+dataset is positioned to address but does not yet answer.</p>
+
+<h3>What the figure does show</h3>
+<p>Taken as orientation rather than as result: where the six substitutions sit relative to
+the DNA, which contacts each one is near, and which regions of the complex move most in the
+first normal mode. That is a reasonable starting point for designing a properly powered
+study.</p>
+
+<h2>Further work</h2>
+
+<p>The obvious next step is replication. Most of the cost of this kind of study is in
+building, parameterising and equilibrating the systems, and that work is done.</p>
+
+<ul>
+  <li><strong>Multiple independent replicas per system</strong>, from different random
+      velocity seeds — commonly more than five — so between-system differences can be
+      separated from within-system variation. This single change converts every observation
+      above into a testable quantity.</li>
+  <li><strong>Convergence assessed and shown</strong>, with RMSD-against-time and related
+      diagnostics, rather than inferred from trajectory length.</li>
+  <li><strong>Local interaction analysis</strong> at the substituted positions, the
+      Y89–guanine stacking being the first case to take: occupancy and geometry of that
+      interaction across replicas, against wild type.</li>
+  <li><strong>Sensitivity to the starting model</strong>, by sampling rotamer choice at the
+      substituted positions rather than committing to a single built geometry.</li>
+  <li><strong>Energetics with uncertainty</strong>, reporting hydrogen bonding and
+      EDA-derived interaction energies across replicas and framing them as relative
+      quantities.</li>
+</ul>
+
+<p>Whether the strong and weak depleted classes have a structural basis is, on this
+evidence, an open question. It is a good question, and this is a reasonable place to start
+on it.</p>
+
+<h2>Methods as performed</h2>
+<div class="scroll">
+<table>
+<tbody>
+<tr><td>Engine</td><td>AMBER20, <code>pmemd.cuda</code></td></tr>
+<tr><td>Force field</td><td>ff19SB</td></tr>
+<tr><td>Starting model</td><td>PDB 1XJV; Coot and MolProbity used to alleviate bad clashes</td></tr>
+<tr><td>Missing residues</td><td>Modeller interface in UCSF Chimera</td></tr>
+<tr><td>Variant construction</td><td>Dunbrack rotamer library in Chimera</td></tr>
+<tr><td>Solvation</td><td>TIP3P water, cubic box extending 12 Å from complex surface</td></tr>
+<tr><td>Counterions</td><td>Potassium, to neutralise system charge</td></tr>
+<tr><td>Ensemble</td><td>NPT, Langevin thermostat</td></tr>
+<tr><td>Non-bonded cutoff</td><td>9 Å, smooth PME</td></tr>
+<tr><td>Production length</td><td>1 μs per system, 1 replica</td></tr>
+<tr><td>Trajectory analysis</td><td><code>cpptraj</code> (RMSD, RMSF, hydrogen bonds)</td></tr>
+<tr><td>Normal mode analysis</td><td><code>cpptraj</code> and ProDy (VMD)</td></tr>
+<tr><td>Energy decomposition</td><td>AMBER-EDA</td></tr>
+<tr><td>Binding enthalpies</td><td>MM-GBSA via <code>MMPBSA.py</code> (AmberTools)</td></tr>
+<tr><td>Downstream analysis</td><td>R (<code>data.table</code>, <code>tidyverse</code>, <code>abind</code>)</td></tr>
+<tr><td>Visualisation</td><td>VMD, UCSF Chimera, ChimeraX, gnuplot, matplotlib, ggplot2</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="foot">
+Companion to Obolenski <em>et al.</em>, <em>A Functional Spectrum of POT1 Alleles Dictates
+Genotype-Phenotype Associations</em>. The molecular dynamics component does not appear in the
+paper. See <code>README.md</code> in this folder for the same material in plain text.
+</p>
+
+</div>
+</body>
+</html>
