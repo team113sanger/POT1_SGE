@@ -122,6 +122,9 @@ are not committed.
 
 ## How the analysis works
 
+Targeton — a genomic region discretely targeted in one SGE editing experiment. A
+targeton may contain both exonic and intronic sequence.
+
 ### 1. Counts
 
 Eighteen libraries, fifteen samples each (five timepoints × three replicates),
